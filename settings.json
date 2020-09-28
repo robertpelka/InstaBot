@@ -1,0 +1,15 @@
+{
+    "login": "yourBotLogin",
+    "password": "yourBotPassword",
+    "numberOfComments": 90,
+    "secondsBetween": 120,
+    "hashtag": "#chosenHashtag",
+    "compliments": ["Really nice!", "This photo is great!", "Love this photo!", "OMG!", "Woah!", "Absolutely stunning!", "It's beautifull!", "So pretty!"],
+    "emojis": ["😊", "😮", "😀", "🤩", "🤤", "🌟", "😁", "🤗", "😍", "😻", "😋", "😄", "😃", "❤️", "🙉", "👌"],
+    "ads": ["Check out", "I recommend checking this profile", "If you are looking for inspiration, check out", "You must see", "Check out the last post on", "We need more Instagram profiles like this or"],
+    "advertisedProfile": "@profileName",
+    "like": true,
+    "follow": true,
+    "comment": true,
+    "blacklist": ["profiles", "you", "want", "to", "skip"]
+}
