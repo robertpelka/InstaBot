@@ -1,6 +1,8 @@
 # InstaBot
 
-![screenshot](https://user-images.githubusercontent.com/71329150/94458707-962ae000-01b6-11eb-9d18-ab07cc733fa1.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71329150/94458707-962ae000-01b6-11eb-9d18-ab07cc733fa1.png">
+</p>
 
 ###### EN
 The bot enters the given hashtag, then opens the last photo and in turn: likes the photo, follows the profile, writes a comment and goes to the next post. Comments are randomly generated to give the impression of being written by a human. The bot skips accounts it has already followed and photos it has already liked.
@@ -13,6 +15,7 @@ Bot wchodzi na podany hashtag, następnie otwiera ostatnie zdjęcie i kolejno: d
   
 Bota można uruchomić komendą `python InstaBot.py`, przed tym należy jednak wpisać dane konta w pliku <i>settings.json</i>, w którym znajdują się również inne ustawienia.  
 InstaBot został stworzony z użyciem Selenium oraz ChromeDrivera i wymaga ich do działania.
-
-
-![results](https://user-images.githubusercontent.com/71329150/94458661-87442d80-01b6-11eb-9422-47c8269c2a08.png)
+<br><br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71329150/94458661-87442d80-01b6-11eb-9422-47c8269c2a08.png">
+</p>
