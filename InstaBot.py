@@ -36,6 +36,10 @@ class InstaBot():
     def login(self, login, password):
         self.driver.get("https://www.instagram.com/")
 
+        bot.waitFor('/html/body/div[2]/div/div/div/div[2]/button[1]')
+        cookieButton = self.driver.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
+        cookieButton.click()
+
         bot.waitFor('//*[@id="loginForm"]/div/div[1]/div/label/input')
         loginInput = self.driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input')
         loginInput.send_keys(login)
