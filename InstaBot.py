@@ -22,15 +22,14 @@ class InstaBot():
         
     # Wait for element to load
     def waitFor(self, xpath):
-        maxWait = 60
+        maxWait = 10
         try:
             element_present = EC.presence_of_element_located((By.XPATH, xpath))
             WebDriverWait(self.driver, maxWait).until(element_present)
         except:
             print("Waited too long for element to load :/")
-            nextButton = self.driver.find_element_by_css_selector('.coreSpriteRightPaginationArrow')
-            nextButton.click()
-            sleep(5)
+            print("Element's XPath: "+ xpath +"\n")
+            quit()
 
     # Login using given username and password
     def login(self, login, password):
@@ -74,16 +73,24 @@ class InstaBot():
 
     # Like, follow, and comment post
     def comment(self, secondsBetween, compliments, emojis, ads, advertisedProfile, like, follow, comment, blacklist):
-        bot.waitFor('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span/*[name()="svg"]')
-        heartSvg = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span/*[name()="svg"]')
-        label = heartSvg.get_attribute("aria-label")
+        bot.waitFor('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span/*[name()="svg"]')
+        heartSvg = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button/div/span/*[name()="svg"]')
+        heartSvgFill = heartSvg.get_attribute("fill")
+
+        # Check if already liked
+        if heartSvgFill == "#ed4956":
+            alreadyLiked = True
+        else:
+            alreadyLiked = False
 
         # Check if already followed
-        notFollowed = False
-        try:
-            self.driver.find_element_by_xpath('//button[normalize-space()="Obserwowanie"]')
-        except:
-            notFollowed = True
+        bot.waitFor('/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[2]/button')
+        followButton = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/header/div[2]/div[1]/div[2]/button')
+        followButtonClasses = followButton.get_attribute("class")
+        if "_8A5w5" in followButtonClasses:
+            alreadyFollowed = True
+        else:
+            alreadyFollowed = False
 
         # Check for profiles from blacklist
         shouldntSkip = True
@@ -99,26 +106,24 @@ class InstaBot():
                 break
 
         # If not already liked and not already followed, and not on blacklist, than like, follow and comment
-        if label == u"Lubię to!" and notFollowed and shouldntSkip:
+        if not alreadyLiked and not alreadyFollowed and shouldntSkip:
             if like:
-                bot.waitFor('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button')
-                heartButton = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[1]/button')
+                bot.waitFor('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button')
+                heartButton = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[1]/button')
                 heartButton.click()
 
             if follow:
                 sleep(2)
-                bot.waitFor('/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button')
-                follow = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button')
-                follow.click()
+                followButton.click()
 
-            bot.waitFor('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[2]/button')
-            commentButton = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[3]/section[1]/span[2]/button')
+            bot.waitFor('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[2]/button')
+            commentButton = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[2]/button')
             commentButton.click()
 
             # Check if input element exists
             inputFound = True
             try:
-                commentInput = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/textarea')
+                commentInput = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[3]/div/form/textarea')
             except:
                 print("Could not find the input element")
                 inputFound = False
@@ -138,7 +143,7 @@ class InstaBot():
                 self.driver.execute_script(JS_ADD_TEXT_TO_INPUT, commentInput, text)
                 commentInput.send_keys(" ")
                 sleep(3)
-                sendButton = self.driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[3]/section[3]/div/form/button')
+                sendButton = self.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div/article/div[3]/section[3]/div/form/button')
                 sendButton.click()
 
             global counter
