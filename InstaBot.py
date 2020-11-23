@@ -57,8 +57,8 @@ class InstaBot():
         searchInput = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input')
         searchInput.send_keys(hashtag)
 
-        bot.waitFor('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[3]/div[2]/div/a[1]')
-        firstResult = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[3]/div[2]/div/a[1]')
+        bot.waitFor('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[4]/div/a[1]')
+        firstResult = self.driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[4]/div/a[1]')
         firstResult.click()
 
         bot.waitFor('//*[@id="react-root"]/section/main/article/div[2]/div/div[1]/div[1]/a')
